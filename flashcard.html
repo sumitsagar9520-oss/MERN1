@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Flashcard</title>
+    <style>
+        /* Center the flashcard on the screen */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* The container determines the 3D perspective space */
+        .flashcard-container {
+            width: 350px;
+            height: 250px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        /* The wrapper holding front and back faces */
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+        }
+
+        /* JavaScript toggles this class to flip the card */
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        /* Shared styling for both card sides */
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        /* Front styling (Question side) */
+        .card-front {
+            background-color: #ffffff;
+            color: #333333;
+            border: 2px solid #e1e4e8;
+        }
+
+        /* Back styling (Answer side) */
+        .card-back {
+            background-color: #4f46e5;
+            color: #ffffff;
+            transform: rotateY(180deg);
+        }
+
+        /* Typography elements */
+        .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 15px;
+            opacity: 0.6;
+        }
+
+        .content {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flashcard-container">
+        <!-- Clicking this element toggles the flip state -->
+        <div class="flashcard" id="flashcard" onclick="flipCard()">
+            
+            <!-- Front of the Card -->
+            <div class="card-face card-front">
+                <div class="label">FlashCard</div>
+                <div class="content">Visiting Card</div>
+            </div>
+
+            <!-- Back of the Card -->
+            <div class="card-face card-back">
+                <div class="label">Guest</div>
+                <div class="content">Invertis University</div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Toggles the 'flipped' class to trigger the CSS transition
+        function flipCard() {
+            const card = document.getElementById('flashcard');
+            card.classList.toggle('flipped');
+        }
+    </script>
+
+</body>
+</html>
